@@ -10,6 +10,10 @@ namespace Assets.Scripts.Input.Gameplay
         public delegate void AttackInputHandler();
         public delegate void SaveHandler();
         public delegate void LoadHandler();
+        public delegate void EnterFirstPersonHandler();
+        public delegate void ExitFirstPersonHandler();
+        public delegate void TakeAimHandler();
+        public delegate void ReleaseArrowHandler();
 
         public event MovementInputHandler OnMovement;
         public event SkipHandler OnSkip;
@@ -17,6 +21,13 @@ namespace Assets.Scripts.Input.Gameplay
         public event AttackInputHandler OnAttack;
         public event SaveHandler OnSave;
         public event LoadHandler OnLoad;
+        public event EnterFirstPersonHandler OnEnterFirstPerson;
+        public event ExitFirstPersonHandler OnExitFirstPerson;
+        public event TakeAimHandler OnTakeAim;
+        public event ReleaseArrowHandler OnReleaseArrow;
+
+        private bool wasMoving = false;
+        private bool isInFirstPerson = false;
 
         private void Update()
         {
@@ -25,6 +36,7 @@ namespace Assets.Scripts.Input.Gameplay
             HandleSkip();
             HandleSave();
             HandleLoad();
+            HandleFP();
         }
 
 
@@ -66,12 +78,18 @@ namespace Assets.Scripts.Input.Gameplay
             if (translation != Vector3.zero)
             {
                 if (OnMovement != null)
+                {
                     OnMovement(translation);
+                    wasMoving = true;
+                }
             }
             else
             {
-                if (OnStopMoving != null)
+                if (OnStopMoving != null && wasMoving)
+                {
                     OnStopMoving();
+                    wasMoving = false;
+                }
             }
 
         }
@@ -88,6 +106,34 @@ namespace Assets.Scripts.Input.Gameplay
             if (UnityEngine.Input.GetKeyDown(KeyCode.F))
                 if (OnAttack != null)
                     OnAttack();
+        }
+
+        private void HandleFP()
+        {
+            if (UnityEngine.Input.GetMouseButtonDown(0))
+            {
+                if (!isInFirstPerson)
+                {
+                    if (OnEnterFirstPerson != null)
+                    {
+                        OnEnterFirstPerson();
+                        isInFirstPerson = true;
+                    }
+                }
+                /*else
+                {
+                    if(OnExitFirstPerson!=null)
+                    {
+                        OnExitFirstPerson();
+                        isInFirstPerson = false;
+                    }
+                }*/
+            }
+            /*else if (UnityEngine.Inpu)
+            {
+                if (OnExitFirstPerson != null)
+                    OnExitFirstPerson();
+            }*/
         }
     }
 }

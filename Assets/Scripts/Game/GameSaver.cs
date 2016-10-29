@@ -7,11 +7,11 @@ using Assets.Scripts.Controllers;
 using Assets.Scripts.Input.Gameplay;
 using UnityEngine.SceneManagement;
 
-public class GameSaver : MonoBehaviour
+public class GameSaver : Constants
 {
     [SerializeField] private OptionsHandler _options;
 
-    private string SAVEFILE_PATH = "/save.dat";
+    //private string SAVEFILE_PATH = "/save.dat";
     private GameData data;
     private KeyboardInputHandler _keyboardInput;
 
@@ -42,7 +42,7 @@ public class GameSaver : MonoBehaviour
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        using (FileStream fs = File.Create(Application.persistentDataPath + SAVEFILE_PATH))
+        using (FileStream fs = File.Create(SAVEFILE_PATH))
         {
             data.Level = SceneManager.GetActiveScene().buildIndex;
             data.masterVolume = _options.MasterVolume;
@@ -56,9 +56,9 @@ public class GameSaver : MonoBehaviour
     {
         
         BinaryFormatter formatter = new BinaryFormatter();
-        if (File.Exists(Application.persistentDataPath + SAVEFILE_PATH))
+        if (File.Exists(SAVEFILE_PATH))
         {
-            using (FileStream fs = File.Open(Application.persistentDataPath + SAVEFILE_PATH, FileMode.OpenOrCreate))
+            using (FileStream fs = File.Open(SAVEFILE_PATH, FileMode.OpenOrCreate))
             {
                 data = (GameData) formatter.Deserialize(fs);
                 yield return null;
@@ -73,7 +73,7 @@ public class GameSaver : MonoBehaviour
 
     public void Delete()
     {
-        File.Delete(Application.persistentDataPath + SAVEFILE_PATH);
+        File.Delete(SAVEFILE_PATH);
     }
 
 }

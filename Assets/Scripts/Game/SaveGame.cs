@@ -4,9 +4,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 
-public class SaveGame : MonoBehaviour {
+public class SaveGame : Constants {
 
-    private const string SAVEFILE_PATH = "/save.dat";
+    //private const string SAVEFILE_PATH = "Assets/Saves/save.dat";
     [SerializeField]
     private OptionsHandler _options;
 
@@ -28,7 +28,7 @@ public class SaveGame : MonoBehaviour {
         Debug.Log("Level saved: "+_dataToSave.Level);
         BinaryFormatter formatter = new BinaryFormatter();
 
-        using (FileStream fs = File.Open(Application.persistentDataPath + SAVEFILE_PATH,FileMode.Open))
+        using (FileStream fs = File.Open(SAVEFILE_PATH,FileMode.Open))
         {
             //Debug.Log("Save:" + _dataToSave.masterVolume + "," + _dataToSave.SFXvolume);
             formatter.Serialize(fs, _dataToSave);

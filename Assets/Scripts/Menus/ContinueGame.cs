@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ContinueGame : MonoBehaviour {
+public class ContinueGame : Constants {
 
     [SerializeField]
     private LoadLevelAsync _levelLoader;
@@ -9,7 +9,7 @@ public class ContinueGame : MonoBehaviour {
     [SerializeField]
     private OptionsHandler _options;
 
-    private const string SAVEFILE_PATH = "/save.dat";
+    //private const string SAVEFILE_PATH = "Assets/Saves/save.dat";
     private GameData data;
 
     public void Continue()

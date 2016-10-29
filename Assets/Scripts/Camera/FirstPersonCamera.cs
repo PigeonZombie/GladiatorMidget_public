@@ -15,8 +15,8 @@ public class FirstPersonCamera : MonoBehaviour {
     private float x = 0.0f;
     private float y = 0.0f;
 
-    private float xSpeed = 10.0f;
-    private float ySpeed = 10.0f;
+    private float xSpeed = 3.0f;
+    private float ySpeed = 3.0f;
 
     private float yMinLimit = -20f;
     private float yMaxLimit = 30f;

@@ -35,13 +35,15 @@ public class ArcherAttack : MonoBehaviour
     {
         _gamepadInput = GetComponentInParent<GamepadInputHandler>();
         _gamepadInput.OnAttack += OnAttack;
-        _keyboardInput = GetComponentInParent<KeyboardInputHandler>();
-        _keyboardInput.OnAttack += OnAttack;
         _gamepadInput.OnEnterFirstPerson += EnterFP;
         _gamepadInput.OnExitFirstPerson += ExitFP;
         _gamepadInput.OnTakeAim += TakeAim;
         _gamepadInput.OnReleaseArrow += Shoot;
 
+        _keyboardInput = GetComponentInParent<KeyboardInputHandler>();
+        _keyboardInput.OnAttack += OnAttack;
+        _keyboardInput.OnEnterFirstPerson += EnterFP;
+        _keyboardInput.OnExitFirstPerson += ExitFP;
 
         _playerMovement = GetComponentInParent<PlayerMovement>();
 
@@ -65,11 +67,14 @@ public class ArcherAttack : MonoBehaviour
     private void OnDestroy()
     {
         _gamepadInput.OnAttack -= OnAttack;
-        _keyboardInput.OnAttack -= OnAttack;
         _gamepadInput.OnEnterFirstPerson -= EnterFP;
         _gamepadInput.OnExitFirstPerson -= ExitFP;
         _gamepadInput.OnTakeAim -= TakeAim;
         _gamepadInput.OnReleaseArrow -= Shoot;
+
+        _keyboardInput.OnAttack -= OnAttack;
+        _keyboardInput.OnEnterFirstPerson += EnterFP;
+        _keyboardInput.OnExitFirstPerson += ExitFP;
     }
 
     private void TakeAim()

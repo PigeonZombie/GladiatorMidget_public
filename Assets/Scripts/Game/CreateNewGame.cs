@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class CreateNewGame : MonoBehaviour {
+public class CreateNewGame : Constants {
 
     [SerializeField]
     private LoadLevelAsync _levelLoader;
@@ -11,7 +11,7 @@ public class CreateNewGame : MonoBehaviour {
     [SerializeField]
     private OptionsHandler _options;
 
-    private const string SAVEFILE_PATH = "/save.dat";
+    //private const string SAVEFILE_PATH = "/save.dat";
     private GameData startingData;
  
 
@@ -34,7 +34,7 @@ public class CreateNewGame : MonoBehaviour {
 
         BinaryFormatter formatter = new BinaryFormatter();
 
-        using (FileStream fs = File.Create(Application.persistentDataPath + SAVEFILE_PATH))
+        using (FileStream fs = File.Create(SAVEFILE_PATH))
         {
             formatter.Serialize(fs, startingData);
             yield return null;

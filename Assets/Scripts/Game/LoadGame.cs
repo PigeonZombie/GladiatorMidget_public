@@ -3,9 +3,9 @@ using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class LoadGame : MonoBehaviour {
+public class LoadGame : Constants {
 
-    private const string SAVEFILE_PATH = "/save.dat";
+    //private const string SAVEFILE_PATH = "Assets/Saves/save.dat";
     public GameData GameData;
 
     /*public GameData GameData
@@ -22,9 +22,9 @@ public class LoadGame : MonoBehaviour {
 	private IEnumerator LoadSaveFile()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        if (File.Exists(Application.persistentDataPath + SAVEFILE_PATH))
+        if (File.Exists(SAVEFILE_PATH))
         {
-            using (FileStream fs = File.Open(Application.persistentDataPath + SAVEFILE_PATH, FileMode.Open))
+            using (FileStream fs = File.Open(SAVEFILE_PATH, FileMode.Open))
             {
                 GameData = (GameData)formatter.Deserialize(fs);
                 fs.Close();

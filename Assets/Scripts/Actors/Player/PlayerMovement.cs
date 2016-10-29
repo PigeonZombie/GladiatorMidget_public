@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
         keyboardInput = GetComponent<KeyboardInputHandler>();
         keyboardInput.OnMovement += OnMove;
         keyboardInput.OnStopMoving += OnStopMoving;
+        
 
     }
 
@@ -67,7 +68,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnStopMoving()
     {
-        Debug.Log("Stop moving");
         anim.SetBool("Moving", false);
     }
 

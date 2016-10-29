@@ -116,6 +116,7 @@ namespace Assets.Scripts.Controllers
             }
             else if (_currentState.Triggers.Left < _joystickDeadZone && _previousState.Triggers.Left >= _joystickDeadZone)
             {
+
                 if (OnExitFirstPerson != null)
                     OnExitFirstPerson();
             }
@@ -165,7 +166,6 @@ namespace Assets.Scripts.Controllers
                 if ((Mathf.Abs(_previousState.ThumbSticks.Left.X) >= _joystickDeadZone ||
                      Mathf.Abs(_previousState.ThumbSticks.Left.Y) >= _joystickDeadZone))
                 {
-                    Debug.Log(_characterMovement);
                     if (OnStopMoving != null)
                         OnStopMoving();
                 }
